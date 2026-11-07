@@ -200,6 +200,19 @@ section{position:relative;padding:96px 0;overflow:hidden}
 .ig span{display:inline-block;font-family:var(--label);font-size:12px;letter-spacing:.24em;text-transform:uppercase;border:1px solid var(--ambar);padding:12px 22px;border-radius:40px;background:rgba(233,168,78,.12)}
 .ig:active{transform:scale(.98)}
 
+/* INGRESSOS */
+#ingressos{background:radial-gradient(ellipse at 50% 0,rgba(26,163,232,.14),transparent 60%),#060b13;text-align:center}
+.tk-card{border:1px solid rgba(26,163,232,.4);border-radius:6px;padding:34px 22px 30px;background:linear-gradient(160deg,rgba(16,36,58,.9),rgba(7,16,28,.95));box-shadow:0 0 0 6px rgba(26,163,232,.05),0 16px 44px rgba(0,0,0,.6)}
+.tk-card .linha{font-family:var(--label);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--bruma);line-height:2}
+.tk-card .linha b{display:block;font-weight:400;font-size:17px;color:var(--osso);letter-spacing:.14em}
+.tk-card .preco{margin:22px 0 4px;font-size:22px;font-style:italic;color:var(--osso)}
+.tk-card .preco small{display:block;font-style:normal;font-size:14px;letter-spacing:.2em;text-transform:uppercase;font-family:var(--label);color:var(--ambar);margin-top:6px}
+.tk{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:26px;text-decoration:none;font-family:var(--label);font-weight:600;font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:#1a1204;background:linear-gradient(135deg,#f2bf6a,#e9a84e);padding:19px 20px;border-radius:44px;box-shadow:0 10px 32px rgba(233,168,78,.3)}
+.tk svg{width:30px;height:30px;flex:none}
+.tk:active{transform:scale(.98)}
+.tk-mini{display:inline-flex;margin-top:18px;padding:15px 26px;font-size:13px}
+.tk small{display:block}
+
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
 </style>
 </head>
@@ -217,6 +230,7 @@ section{position:relative;padding:96px 0;overflow:hidden}
   <a href="#atmosfera">Atmosfera <small>VIII</small></a>
   <a href="#curiosidades">Você Sabia? <small>IX</small></a>
   <a href="#ficha">Ficha Técnica <small>X</small></a>
+  <a href="#ingressos">Ingressos <small>XI</small></a>
 </nav>
 
 <main>
@@ -453,6 +467,21 @@ section{position:relative;padding:96px 0;overflow:hidden}
   </div>
 </section>
 
+<!-- INGRESSOS -->
+<section id="ingressos">
+  <div class="wrap">
+    <span class="eyebrow rv">Garanta o seu lugar</span>
+    <h2 class="rv">Compre seu ingresso aqui</h2>
+    <div class="rule rv"></div>
+    <div class="tk-card rv">
+      <div class="linha"><b>Teatro Marília</b>Av. Prof. Alfredo Balena, 586<br>Belo Horizonte · MG</div>
+      <div class="linha" style="margin-top:18px"><b>19 a 22 de novembro</b>Quinta a sábado, 20h · Domingo, 19h</div>
+      <p class="preco">Ingressos de R$ 40 a R$ 80<small>Parcele em até 12x</small></p>
+      <a class="tk" href="https://bileto.sympla.com.br/event/125222" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h15A1.5 1.5 0 0 1 21 8.5V10a2 2 0 0 0 0 4v1.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 15.5V14a2 2 0 0 0 0-4V8.5Z"/><path d="M14 7v10" stroke-dasharray="1.6 2.2"/></svg><span>Comprar ingressos</span></a>
+    </div>
+  </div>
+</section>
+
 <!-- CONTRACAPA -->
 <section id="contra" class="vig">
   <video muted loop playsinline preload="none" data-play src="renda.mp4"></video>
@@ -461,6 +490,7 @@ section{position:relative;padding:96px 0;overflow:hidden}
     <img class="tit rv" src="logo-titulo.png" alt="A Mulher de Preto">
     <p class="big dim rv d1" style="margin-bottom:6px">Algumas histórias permanecem conosco muito depois que as luzes se apagam.</p>
     <div class="serv rv d2"><b>Teatro Marília</b>Estreia 19 de novembro<br>Quinta a sábado, 20h · Domingo, 19h</div>
+    <a class="tk tk-mini rv d3" href="https://bileto.sympla.com.br/event/125222" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h15A1.5 1.5 0 0 1 21 8.5V10a2 2 0 0 0 0 4v1.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 15.5V14a2 2 0 0 0 0-4V8.5Z"/><path d="M14 7v10" stroke-dasharray="1.6 2.2"/></svg><span>Compre seu ingresso</span></a>
     <a class="wa rv d3" data-wa href="#" target="_blank" rel="noopener" style="margin-top:14px"><svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" fill="currentColor"><path d="M16.04 3C9.4 3 4 8.38 4 15.01c0 2.12.55 4.18 1.6 6L4 29l8.2-1.56a12.03 12.03 0 0 0 3.84.62C22.66 28.06 28 22.68 28 16.05 28 9.4 22.68 3 16.04 3Zm0 22.04c-1.2 0-2.38-.3-3.42-.88l-.5-.28-4.86.93.97-4.74-.32-.52a9.9 9.9 0 0 1-1.5-5.28c0-5.5 4.5-9.97 10.03-9.97 5.52 0 10.02 4.47 10.02 9.97 0 5.5-4.5 9.97-10.02 9.97l-.4-.2Zm5.5-7.4c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.78.98-.96 1.18-.18.2-.35.22-.65.08-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.68-1.64-.93-2.25-.25-.58-.5-.5-.68-.5h-.58c-.2 0-.53.08-.8.38-.28.3-1.05 1.02-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.1 3.2 5.1 4.5.72.3 1.28.5 1.7.64.72.23 1.37.2 1.88.12.58-.08 1.78-.72 2.03-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35Z"/></svg><span>Compartilhar no WhatsApp</span></a>
     <a class="ig rv d3" href="https://www.instagram.com/foco6producoes/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg><em>Siga a Foco 6 Produções no Instagram</em><b>@foco6producoes</b><span>Seguir</span></a>
     <img class="f6 rv d3" src="foco6-branco.png" alt="Foco 6 Produções">
