@@ -26,6 +26,11 @@ img,video{display:block;max-width:100%}
 /* progresso e menu */
 #prog{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--ciano),var(--ambar));z-index:60}
 #menuBtn{position:fixed;top:max(14px,env(safe-area-inset-top));right:14px;z-index:60;width:44px;height:44px;border-radius:50%;border:1px solid var(--linha);background:rgba(6,11,19,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--osso);display:grid;place-items:center;cursor:pointer}
+#somBtn{position:fixed;top:max(14px,env(safe-area-inset-top));right:66px;z-index:60;width:44px;height:44px;border-radius:50%;border:1px solid var(--linha);background:rgba(6,11,19,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--osso);display:grid;place-items:center;cursor:pointer;padding:0}
+#somBtn svg{width:20px;height:20px}#somBtn .of{display:none}#somBtn.mudo .on{display:none}#somBtn.mudo .of{display:block}
+#somBtn.pulsa::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--ciano);opacity:.7;animation:somp 2s ease-out infinite}
+@keyframes somp{to{transform:scale(1.35);opacity:0}}
+@media(min-width:700px){#menuBtn{right:calc(50% - 240px + 14px)}#somBtn{right:calc(50% - 240px + 66px)}}
 #menuBtn span,#menuBtn span::before,#menuBtn span::after{display:block;width:18px;height:1.5px;background:currentColor;position:relative;content:''}
 #menuBtn span::before{position:absolute;top:-6px}#menuBtn span::after{position:absolute;top:6px}
 #menu{position:fixed;inset:0;z-index:55;background:rgba(4,8,14,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;flex-direction:column;justify-content:center;padding:80px 32px 40px;opacity:0;pointer-events:none;transition:opacity .45s}
@@ -220,6 +225,8 @@ section{position:relative;padding:96px 0;overflow:hidden}
 </head>
 <body>
 <div id="prog"></div>
+<button id="somBtn" class="mudo pulsa" aria-label="Ligar a trilha sonora" title="Trilha sonora"><svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg><svg class="of" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg></button>
+<audio id="trilha" src="caixinha.m4a" loop preload="none"></audio>
 <button id="menuBtn" aria-label="Abrir menu"><span></span></button>
 <nav id="menu" aria-label="Capítulos">
   <a href="#capa">Capa <small>I</small></a>
@@ -518,6 +525,15 @@ section{position:relative;padding:96px 0;overflow:hidden}
   var fab=document.getElementById('waFab'),cap=document.getElementById('capa');
   function fabv(){fab.classList.toggle('on',scrollY>cap.offsetHeight*.6)}
   addEventListener('scroll',fabv,{passive:true});fabv();
+
+  var au=document.getElementById('trilha'),sb=document.getElementById('somBtn'),querSom=true,tocando=false,fadeT;
+  function vol(v,ms){clearInterval(fadeT);var a=au.volume,st=(v-a)/(ms/50);fadeT=setInterval(function(){a+=st;if((st>0&&a>=v)||(st<=0&&a<=v)){a=v;clearInterval(fadeT);if(v===0)au.pause()}au.volume=Math.max(0,Math.min(1,a))},50)}
+  function ligar(ev){if(ev&&ev.target&&sb.contains(ev.target))return;if(!querSom||tocando)return;au.volume=0;var p=au.play();if(p&&p.then)p.then(function(){tocando=true;sb.classList.remove('mudo','pulsa');vol(.5,2500);rm()}).catch(function(){})}
+  function desligar(){tocando=false;sb.classList.add('mudo');vol(0,600)}
+  function rm(){['pointerdown','touchend','click','keydown'].forEach(function(e){removeEventListener(e,ligar)})}
+  ['pointerdown','touchend','click','keydown'].forEach(function(e){addEventListener(e,ligar,{passive:true})});
+  sb.addEventListener('click',function(ev){ev.stopPropagation();if(tocando){querSom=false;desligar()}else{querSom=true;sb.classList.remove('pulsa');ligar()}});
+  document.addEventListener('visibilitychange',function(){if(document.hidden){if(tocando)au.pause()}else if(tocando)au.play().catch(function(){})});
   var prog=document.getElementById('prog');
   addEventListener('scroll',function(){var h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
